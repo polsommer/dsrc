@@ -34,6 +34,7 @@ public class mission_base extends script.base_script
     public static final int INFORMANT_EASY = 1;
     public static final int INFORMANT_MEDIUM = 2;
     public static final int INFORMANT_HARD = 3;
+    public static final int REWARD_MULTIPLIER = 10;
     public static final float SPAWN_OVERLOAD_DIFFICULTY_MODIFIER = 0.50f;
     public location findRandomLocation(location locCenter, int intVariance) throws InterruptedException
     {
@@ -93,11 +94,7 @@ public class mission_base extends script.base_script
         {
             transferBankCreditsTo(objMissionData, objPlayer, intBond, "testSuccess", "testFail", dctParams);
         }
-        int intReward = getMissionReward(objMissionData);
-        float multiplier = utils.stringToFloat(getConfigSetting("GameServer", "missionCreditBonus"));
-        if (multiplier > 1){
-            intReward = (int) (intReward * (float) multiplier);
-        }
+        int intReward = getMissionReward(objMissionData) * REWARD_MULTIPLIER;
         int jediBonusReward = 0;
         if (hasObjVar(objMissionData, "jediBonusReward"))
         {
